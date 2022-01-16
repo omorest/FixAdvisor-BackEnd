@@ -1,0 +1,28 @@
+{
+  "name": "fixadvisor-backend",
+  "version": "0.0.1",
+  "description": "Api rest fixadvisor",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omorest/FixAdvisor-BackEnd.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "Óscar Moreira Estévez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omorest/FixAdvisor-BackEnd/issues"
+  },
+  "homepage": "https://github.com/omorest/FixAdvisor-BackEnd#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
+  }
+}
