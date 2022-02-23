@@ -1,11 +1,11 @@
 name: integration
 
 on:
-  pull_requests:
+  pull_request:
     branches:
       - main
       - develop
-      
+
 jobs: 
   ci:
     runs-on: ubuntu-latest
