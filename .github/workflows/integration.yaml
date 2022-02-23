@@ -2,7 +2,12 @@ name: integration
 
 on:
   pull_request: 
-    branches: [master, develop]
+    branches: 
+      - master
+      - develop
+  push:
+    - master
+    - develop
 
 jobs: 
   ci:
