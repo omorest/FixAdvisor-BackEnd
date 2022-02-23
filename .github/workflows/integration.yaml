@@ -1,6 +1,11 @@
 name: integration
 
-on: [pull_request, push]
+on:  
+  push:
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs: 
   ci:
