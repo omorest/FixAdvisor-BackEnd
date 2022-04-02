@@ -4,6 +4,8 @@
   "description": "Api rest fixadvisor",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev firebase/firebaseConfig.ts",
     "test": "jest",
     "serve": "nodemon app.ts"
   },
@@ -23,7 +25,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "firebase": "^9.6.10",
+    "ts-node-dev": "^1.1.8"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
