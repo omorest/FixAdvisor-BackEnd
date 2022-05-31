@@ -1,10 +1,14 @@
+import { routerServices, routerClients, routerProviders } from './routes'
 import express, { Express } from 'express'
-import { router } from './routes'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 const app: Express = express()
 
-app.use(router)
+app.use(cors())
 app.use(bodyParser.json())
+app.use(routerServices)
+app.use(routerClients)
+app.use(routerProviders)
 
 export { app }

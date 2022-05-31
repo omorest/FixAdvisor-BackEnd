@@ -1,5 +1,6 @@
 import { initializeApp, applicationDefault } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
+import { getAuth } from 'firebase-admin/auth'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -14,8 +15,9 @@ dotenv.config()
 // }
 
 // initializeApp(firebaseConfig)
-initializeApp({
+const defaultApp = initializeApp({
   credential: applicationDefault()
 })
 
+export const authF = getAuth(defaultApp)
 export const db = getFirestore()
