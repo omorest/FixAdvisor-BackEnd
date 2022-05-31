@@ -5,7 +5,6 @@ type DocFB = FirebaseFirestore.QueryDocumentSnapshot<FirebaseFirestore.DocumentD
 
 export const toClient = (doc: DocFB): Client => {
   return {
-    id: doc.id,
     ...doc.data()
   } as Client
 }

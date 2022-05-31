@@ -13,9 +13,7 @@ routerClients.get('/api/clients', async (req: Request, res: Response) => {
 
 routerClients.post('/api/users/new-client', async (req: Request, res: Response) => {
   const client: Client = req.body
-  await db.collection('clients').add({
-    ...client
-  })
+  db.collection('clients').doc(client.id).set(client)
   res.json({ status: 200 })
 })
 
