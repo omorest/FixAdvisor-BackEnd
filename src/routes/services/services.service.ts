@@ -11,6 +11,16 @@ routerServices.get('/api/services/', async (req: Request, res: Response) => {
   res.json(services)
 })
 
+routerServices.get('/api/services/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const servicesRef = db.collection('services')
+  const service = await servicesRef.where('id', '==', id).get()
+  service.forEach(element => {
+    res.json(element.data())
+  })
+  // res.json(uniqueService[0])
+})
+
 routerServices.post('/api/new-service', async (req: Request, res: Response) => {
   const service: Service = req.body
   await db.collection('services').add({
