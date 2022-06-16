@@ -11,6 +11,15 @@ routerProviders.get('/api/providers', async (req: Request, res: Response) => {
   res.json(providers)
 })
 
+routerProviders.get('/api/providers/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const providersRef = db.collection('providers')
+  const provider = await providersRef.where('id', '==', id).get()
+  provider.forEach(element => {
+    res.json(element.data())
+  })
+})
+
 routerProviders.post('/api/users/new-provider', async (req: Request, res: Response) => {
   const provider: Provider = req.body
   db.collection('providers').doc(provider.id).set(provider)
