@@ -20,7 +20,7 @@ routerProviders.get('/api/providers/:id', async (req: Request, res: Response) =>
   })
 })
 
-routerProviders.post('/api/users/new-provider', async (req: Request, res: Response) => {
+routerProviders.post('/api/providers/new-provider', async (req: Request, res: Response) => {
   const provider: Provider = req.body
   db.collection('providers').doc(provider.id).set(provider)
   res.json({ status: 200 })
