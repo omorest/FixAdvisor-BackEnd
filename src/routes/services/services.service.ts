@@ -11,7 +11,7 @@ routerServices.get('/api/services/', async (req: Request, res: Response) => {
   res.json(services)
 })
 
-routerServices.post('/api/new-service', async (req: Request, res: Response) => {
+routerServices.post('/api/services/new-service', async (req: Request, res: Response) => {
   const service: Service = req.body
   await db.collection('services').add({
     ...service
