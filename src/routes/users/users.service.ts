@@ -37,7 +37,7 @@ routerUsers.get('/api/favourites/:idClient', async (req: Request, res: Response)
 
   const servicesRef = await db.collection('services').get()
   const allServices = servicesRef.docs.map(doc => doc.data())
-  const services = allServices.filter((service: Service) => favouriteServices.map(id => id === service.id))
+  const services = allServices.filter((service: Service) => favouriteServices.includes(service.id))
   res.json(services)
 })
 
