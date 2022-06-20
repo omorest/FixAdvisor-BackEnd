@@ -41,4 +41,21 @@ routerUsers.get('/api/favourites/:idClient', async (req: Request, res: Response)
   res.json(services)
 })
 
+routerUsers.post('/api/favourites/:idClient-:idService', async (req: Request, res: Response) => {
+  const { idClient, idService } = req.params
+
+  const clientRef = db.collection('clients').doc(idClient)
+  const { favouriteServices: favouriteServicesIds } = (await clientRef.get()).data()
+
+  if (favouriteServicesIds.includes(idService)) {
+    const favouriteServicesUpdates: string[] = favouriteServicesIds.filter(id => id !== idService)
+    const resp = await clientRef.update({ favouriteServices: favouriteServicesUpdates })
+    res.json({ status: 200 })
+    return
+  }
+
+  const resp = await clientRef.update({ favouriteServices: [...favouriteServicesIds, idService] })
+  res.json({ status: 200 })
+})
+
 export { routerUsers }
