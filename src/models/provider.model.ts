@@ -6,6 +6,7 @@ export interface Provider {
   phoneNumber: number
   logoImage: string
   id: string
+  favouriteServices?: string[]
   servicesIds?: string[]
   website?: string
 }

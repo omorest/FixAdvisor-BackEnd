@@ -17,4 +17,13 @@ routerClients.post('/api/users/new-client', async (req: Request, res: Response) 
   res.json({ status: 200 })
 })
 
+routerClients.get('/api/clients/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const clientsRef = db.collection('clients')
+  const provider = await clientsRef.where('id', '==', id).get()
+  provider.forEach(element => {
+    res.json(element.data())
+  })
+})
+
 export { routerClients }
