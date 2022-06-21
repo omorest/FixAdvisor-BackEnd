@@ -49,13 +49,13 @@ routerUsers.post('/api/favourites/:idClient-:idService', async (req: Request, re
 
   if (favouriteServicesIds.includes(idService)) {
     const favouriteServicesUpdates: string[] = favouriteServicesIds.filter(id => id !== idService)
-    const resp = await clientRef.update({ favouriteServices: favouriteServicesUpdates })
-    res.json({ status: 200 })
+    await clientRef.update({ favouriteServices: favouriteServicesUpdates })
+    res.json({ favouriteServices: favouriteServicesUpdates })
     return
   }
 
-  const resp = await clientRef.update({ favouriteServices: [...favouriteServicesIds, idService] })
-  res.json({ status: 200 })
+  await clientRef.update({ favouriteServices: [...favouriteServicesIds, idService] })
+  res.json({ favouriteServices: [...favouriteServicesIds, idService] })
 })
 
 export { routerUsers }
