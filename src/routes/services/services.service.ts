@@ -20,6 +20,16 @@ routerServices.get('/api/services/:id', async (req: Request, res: Response) => {
   })
 })
 
+routerServices.get('/api/services/search/:input', async (req: Request, res: Response) => {
+  const { input } = req.params
+  const servicesRef = await db.collection('services').get()
+  const services = servicesRef.docs.map(toService)
+  const servicesSearched = services?.filter(service => service.nameService.toLocaleLowerCase().includes(input.toLocaleLowerCase())) || []
+  res
+    .status(200)
+    .json(servicesSearched)
+})
+
 routerServices.post('/api/services/new-service', async (req: Request, res: Response) => {
   const service: Service = req.body
   db.collection('services').doc(service.id).set(service)
