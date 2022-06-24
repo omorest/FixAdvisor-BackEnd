@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express'
 import { db } from '../../../firebase/firebaseConfig'
-import { Service } from '../../models'
+import { Provider, Service } from '../../models'
 import { toService } from './parserServices'
 
 const routerServices = Router()
@@ -14,8 +14,8 @@ routerServices.get('/api/services/', async (req: Request, res: Response) => {
 routerServices.get('/api/services/:id', async (req: Request, res: Response) => {
   const { id } = req.params
   const servicesRef = db.collection('services')
-  const provider = await servicesRef.where('id', '==', id).get()
-  provider.forEach(element => {
+  const service = await servicesRef.where('id', '==', id).get()
+  service.forEach(element => {
     res.json(element.data())
   })
 })
@@ -33,6 +33,9 @@ routerServices.get('/api/services/search/:input', async (req: Request, res: Resp
 routerServices.post('/api/services/new-service', async (req: Request, res: Response) => {
   const service: Service = req.body
   db.collection('services').doc(service.id).set(service)
+  const providerRef = db.collection('providers').doc(service.providerId)
+  const { servicesIds } = (await providerRef.get()).data() as Provider
+  await providerRef.update({ servicesIds: [...servicesIds, service.id] })
   res.json({ status: 200 })
 })
 
