@@ -30,6 +30,18 @@ routerServices.get('/api/services/search/:input', async (req: Request, res: Resp
     .json(servicesSearched)
 })
 
+routerServices.get('/api/services/provider/:providerId', async (req: Request, res: Response) => {
+  const { providerId } = req.params
+  const providerRef = db.collection('providers').doc(providerId)
+  const { servicesIds } = (await providerRef.get()).data() as Provider
+  const servicesRef = await db.collection('services').get()
+  const services = servicesRef.docs.map(toService)
+  const servicesProvider = services.filter((service: Service) => servicesIds.includes(service.id))
+  res
+    .status(200)
+    .json(servicesProvider)
+})
+
 routerServices.post('/api/services/new-service', async (req: Request, res: Response) => {
   const service: Service = req.body
   db.collection('services').doc(service.id).set(service)
