@@ -2,6 +2,7 @@ import { routerServices, routerClients, routerProviders, routerUsers } from './r
 import express, { Express } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import { routerReviews } from './routes/reviews/reviews.services'
 
 const app: Express = express()
 
@@ -11,5 +12,6 @@ app.use(routerServices)
 app.use(routerClients)
 app.use(routerProviders)
 app.use(routerUsers)
+app.use(routerReviews)
 
 export { app }
