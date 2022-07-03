@@ -36,7 +36,7 @@ routerServices.get('/api/services/provider/:providerId', async (req: Request, re
   const { servicesIds } = (await providerRef.get()).data() as Provider
   const servicesRef = await db.collection('services').get()
   const services = servicesRef.docs.map(toService)
-  const servicesProvider = services.filter((service: Service) => servicesIds.includes(service.id))
+  const servicesProvider = services.filter((service: Service) => servicesIds?.includes(service.id))
   res
     .status(200)
     .json(servicesProvider)
@@ -46,8 +46,9 @@ routerServices.post('/api/services/new-service', async (req: Request, res: Respo
   const service: Service = req.body
   db.collection('services').doc(service.id).set(service)
   const providerRef = db.collection('providers').doc(service.providerId)
-  const { servicesIds } = (await providerRef.get()).data() as Provider
+  const { servicesIds } = (await providerRef.get()).data()
   await providerRef.update({ servicesIds: [...servicesIds, service.id] })
+  db.collection('reviews').doc('rev' + service.id).set({ serviceId: service.id, reviews: [] })
   res.json({ status: 200 })
 })
 
