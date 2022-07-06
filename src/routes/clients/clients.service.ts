@@ -11,7 +11,7 @@ routerClients.get('/api/clients', async (req: Request, res: Response) => {
   res.json(clients)
 })
 
-routerClients.post('/api/users/new-client', async (req: Request, res: Response) => {
+routerClients.post('/api/clients/new-client', async (req: Request, res: Response) => {
   const client: Client = req.body
   db.collection('clients').doc(client.id).set(client)
   res.json({ status: 200 })
