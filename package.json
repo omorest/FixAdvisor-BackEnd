@@ -2,7 +2,7 @@
   "name": "fixadvisor-backend",
   "version": "0.0.1",
   "description": "Api rest fixadvisor",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "tsc": "tsc",
     "build": "tsc",
@@ -10,7 +10,7 @@
     "firebase": "ts-node-dev firebase/firebaseConfig.ts",
     "test": "jest",
     "serve": "nodemon app.ts",
-    "start": "node main.ts"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
