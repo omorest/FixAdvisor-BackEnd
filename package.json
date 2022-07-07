@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "build": "tsc",
     "dev": "ts-node-dev main.ts",
     "firebase": "ts-node-dev firebase/firebaseConfig.ts",
     "test": "jest",
-    "serve": "nodemon app.ts"
+    "serve": "nodemon app.ts",
+    "start": "node main.ts"
   },
   "repository": {
     "type": "git",
