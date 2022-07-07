@@ -5,6 +5,10 @@ import { toClient } from './parserClients'
 
 const routerClients = Router()
 
+routerClients.get('/api/', async (req: Request, res: Response) => {
+  res.send('Conecting /api')
+})
+
 routerClients.get('/api/clients', async (req: Request, res: Response) => {
   const usersDocs = await db.collection('clients').get()
   const clients = usersDocs.docs.map(toClient)
