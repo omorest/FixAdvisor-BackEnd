@@ -6,6 +6,11 @@
 
 - Node version 14
 - Firebase account
+- Firebase Store with this collections:
+  - clients
+  - providers
+  - services
+  - reviews
 
 File `.env` with the following content about Firebase credentials:
 
