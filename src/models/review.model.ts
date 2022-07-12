@@ -5,6 +5,7 @@ export interface Review {
   providerName: string
   clientName: string
   rate: number
+  date: string
 }
 
 export interface ReviewsService {

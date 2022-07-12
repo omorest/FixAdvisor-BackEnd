@@ -10,7 +10,7 @@ routerReviews.get('/api/reviews/:serviceId', async (req: Request, res: Response)
   const reviewsService = await reviewsRef.where('serviceId', '==', serviceId).get()
   const reviews = reviewsService.docs.map(doc => {
     const { reviews } = doc.data()
-    return reviews
+    return reviews as Review
   }).flat(1)
   res.json(reviews)
 })
