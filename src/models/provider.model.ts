@@ -4,7 +4,7 @@ export interface Provider {
   company: string
   location: string
   phoneNumber: number
-  urlLogoProvider: string
+  urlProfileImage?: string
   id: string
   servicesIds?: string[]
   website?: string

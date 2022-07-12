@@ -3,4 +3,5 @@ export interface Client{
   email: string
   id: string
   favouriteServices?: string[]
+  urlProfileImage?: string
 }
