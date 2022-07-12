@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express'
 import { db } from '../../../firebase/firebaseConfig'
 import { Review } from '../../models/review.model'
+import { calculateRateReviews, calculateStars } from '../../utils/utils'
 
 const routerReviews = Router()
 
@@ -21,9 +22,19 @@ routerReviews.post('/api/reviews/newReview/:serviceId', async (req: Request, res
 
   const reviewsRef = await db.collection('reviews').doc('rev' + serviceId)
   const { reviews } = (await reviewsRef.get()).data()
-  const indexNewReview = reviews.findIndex((review: Review) => review.id === newReview.id)
+  const indexNewReview = reviews && reviews.length > 0 ? reviews.findIndex((review: Review) => review.id === newReview.id) : -1
   if (indexNewReview < 0) {
-    await reviewsRef.update({ reviews: [...reviews, newReview] })
+    const reviewsUpdated = [...reviews, newReview]
+    const stars = calculateStars(reviewsUpdated)
+    const newRate = calculateRateReviews(stars, reviewsUpdated.length)
+    await reviewsRef.update({
+      starsRating: stars,
+      rate: newRate,
+      reviews: reviewsUpdated,
+      totalReviews: reviewsUpdated.length
+    })
+    const serviceRef = await db.collection('services').doc(serviceId)
+    serviceRef.update({ rate: newRate, totalReviews: reviewsUpdated.length, rateStars: stars })
     res.status(200).json({ message: 'correct' })
     return
   }

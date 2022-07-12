@@ -11,4 +11,7 @@ export interface Review {
 export interface ReviewsService {
   serviceId: string
   reviews: Review[]
+  rate: number
+  totalReviews: number
+  starsRating: [number, number, number, number, number]
 }
