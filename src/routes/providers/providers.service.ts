@@ -26,4 +26,10 @@ routerProviders.post('/api/providers/new-provider', async (req: Request, res: Re
   res.json({ status: 200 })
 })
 
+routerProviders.put('/api/providers/update-provider', async (req: Request, res: Response) => {
+  const provider: Provider = req.body
+  db.collection('providers').doc(provider.id).update({ ...provider })
+  res.json({ status: 200 })
+})
+
 export { routerProviders }
