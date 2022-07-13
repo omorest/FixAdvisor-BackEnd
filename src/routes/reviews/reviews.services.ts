@@ -35,14 +35,14 @@ routerReviews.post('/api/reviews/newReview/:serviceId', async (req: Request, res
     })
     const serviceRef = await db.collection('services').doc(serviceId)
     serviceRef.update({ rate: newRate, totalReviews: reviewsUpdated.length, rateStars: stars })
-    res.status(200).json({ message: 'correct' })
+    res.status(200).json({ reviews: [...reviews, newReview] })
     return
   }
   const reviewsCopy = [...reviews]
   reviewsCopy[indexNewReview] = newReview
   await reviewsRef.update({ reviews: reviewsCopy })
 
-  res.status(200).json({ message: 'correct' })
+  res.status(200).json({ reviews: [...reviews, newReview] })
 })
 
 export { routerReviews }
