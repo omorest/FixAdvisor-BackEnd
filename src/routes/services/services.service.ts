@@ -52,4 +52,19 @@ routerServices.post('/api/services/new-service', async (req: Request, res: Respo
   res.json({ status: 200 })
 })
 
+routerServices.delete('/api/services/delete-service/', async (req: Request, res: Response) => {
+  const service: Service = req.body
+  await db.collection('services').doc(service.id).delete()
+  const providerRef = db.collection('providers').doc(service.providerId)
+  const { servicesIds } = (await providerRef.get()).data()
+  await providerRef.update({ servicesIds: [...servicesIds.filter(serviceIn => serviceIn.id !== service.id)] })
+  res.json({ status: 200 })
+})
+
+routerServices.put('/api/services/update-service/', async (req: Request, res: Response) => {
+  const service: Service = req.body
+  await db.collection('services').doc(service.id).update({ ...service })
+  res.json({ status: 200 })
+})
+
 export { routerServices }
