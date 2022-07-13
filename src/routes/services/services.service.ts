@@ -58,7 +58,7 @@ routerServices.delete('/api/services/delete-service/', async (req: Request, res:
   const providerRef = db.collection('providers').doc(service.providerId)
   const { servicesIds } = (await providerRef.get()).data()
   await providerRef.update({ servicesIds: [...servicesIds.filter(serviceIn => serviceIn.id !== service.id)] })
-  res.json({ status: 200 })
+  res.json({ servicesIds: [...servicesIds.filter(serviceIn => serviceIn.id !== service.id)] })
 })
 
 routerServices.put('/api/services/update-service/', async (req: Request, res: Response) => {
