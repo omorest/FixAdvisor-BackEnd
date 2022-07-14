@@ -1,6 +1,7 @@
 import { Review } from '../models/review.model'
 
-export const calculateRateReviews = (stars: number[], totalReviews) => {
+export const calculateRateReviews = (stars: number[], totalReviews = 0) => {
+  if (stars.every(value => value === 0)) return 0
   const valueRateList: number[] = stars.map((currentValue, index): any => (currentValue * (index + 1)))
   const valueList = valueRateList.reduce((acc, current) => acc + current)
   const valueRate = valueList / stars.reduce((acc, current) => acc + current)
